@@ -47,11 +47,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateProduct = (id: string, updatedProduct: Partial<Product>) => {
-    setProducts((prev) => prev.map(p => p.id === id ? { ...p, ...updatedProduct } : p));
+    setProducts((prev) => prev.map((p) => (p.id === id ? { ...p, ...updatedProduct } : p)));
   };
 
   const deleteProduct = (id: string) => {
-    setProducts((prev) => prev.filter(p => p.id !== id));
+    setProducts((prev) => prev.filter((p) => p.id !== id));
   };
 
   const updateSettings = (newSettings: SiteSettings) => {
@@ -59,7 +59,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <DataContext.Provider value={{ products, addProduct, updateProduct, deleteProduct, settings, updateSettings }}>
+    <DataContext.Provider
+      value={{ products, addProduct, updateProduct, deleteProduct, settings, updateSettings }}
+    >
       {children}
     </DataContext.Provider>
   );

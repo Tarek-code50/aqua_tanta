@@ -11,10 +11,10 @@ const SavingsCalculator: React.FC = () => {
 
   const calculateSavings = () => {
     if (typeof bottlesPerWeek !== 'number') return;
-    
+
     const yearlyBottleCost = bottlesPerWeek * 52 * BOTTLE_COST;
     const netSavings = yearlyBottleCost - FILTER_MAINTENANCE_YEARLY;
-    
+
     setSavings(Math.max(0, netSavings));
   };
 
@@ -46,15 +46,11 @@ const SavingsCalculator: React.FC = () => {
 
         {savings !== null && (
           <div className="animate-fade-in bg-white dark:bg-slate-700 p-4 rounded-xl shadow-lg border-2 border-green-500">
-            <p className="text-lg text-slate-600 dark:text-slate-200">
-              {t.savings.result}
-            </p>
+            <p className="text-lg text-slate-600 dark:text-slate-200">{t.savings.result}</p>
             <p className="text-4xl font-black text-green-600 dark:text-green-400 my-2">
               {savings.toLocaleString()} {t.products.currency}
             </p>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              {t.savings.perYear}
-            </p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">{t.savings.perYear}</p>
           </div>
         )}
       </div>

@@ -36,25 +36,29 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
 
   return (
     <>
-      <motion.nav 
+      <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
-          isScrolled 
-            ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-lg h-16 shadow-md border-slate-200/50 dark:border-slate-800/50' 
+          isScrolled
+            ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-lg h-16 shadow-md border-slate-200/50 dark:border-slate-800/50'
             : 'bg-transparent h-24 border-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex justify-between items-center h-full">
-            
             {/* Logo */}
-            <div className="flex-shrink-0 flex items-center cursor-pointer gap-2" onClick={() => scrollToSection('home')}>
+            <div
+              className="flex-shrink-0 flex items-center cursor-pointer gap-2"
+              onClick={() => scrollToSection('home')}
+            >
               <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-brand-500/30">
                 A
               </div>
-              <span className={`text-2xl font-bold bg-clip-text text-transparent bg-gradient-primary font-cairo ${!isScrolled && theme === 'dark' ? 'text-white' : ''}`}>
+              <span
+                className={`text-2xl font-bold bg-clip-text text-transparent bg-gradient-primary font-cairo ${!isScrolled && theme === 'dark' ? 'text-white' : ''}`}
+              >
                 Aqua Tanta
               </span>
             </div>
@@ -66,7 +70,9 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
                   className={`text-sm font-bold tracking-wide transition-colors relative group ${
-                    !isScrolled && theme === 'dark' ? 'text-slate-100' : 'text-slate-600 dark:text-slate-300'
+                    !isScrolled && theme === 'dark'
+                      ? 'text-slate-100'
+                      : 'text-slate-600 dark:text-slate-300'
                   } hover:text-brand-600 dark:hover:text-brand-400`}
                 >
                   {item.label}
@@ -77,18 +83,22 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
 
             {/* Tools */}
             <div className="hidden md:flex items-center space-x-4 rtl:space-x-reverse">
-              <button 
+              <button
                 onClick={toggleTheme}
                 className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
               >
-                {theme === 'light' ? <Moon size={20} className="text-slate-600" /> : <Sun size={20} className={isScrolled ? "text-slate-300" : "text-white"} />}
+                {theme === 'light' ? (
+                  <Moon size={20} className="text-slate-600" />
+                ) : (
+                  <Sun size={20} className={isScrolled ? 'text-slate-300' : 'text-white'} />
+                )}
               </button>
 
-              <button 
+              <button
                 onClick={toggleLanguage}
                 className={`flex items-center gap-1 px-3 py-1.5 rounded-full border text-xs font-bold transition-all ${
-                  isScrolled 
-                    ? 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300' 
+                  isScrolled
+                    ? 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300'
                     : 'border-white/20 text-slate-800 dark:text-white bg-white/10 backdrop-blur-md'
                 }`}
               >
@@ -96,7 +106,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
                 <span>{language === 'ar' ? 'EN' : 'AR'}</span>
               </button>
 
-              <a 
+              <a
                 href={`https://wa.me/${settings.contact.whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -124,7 +134,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -140,7 +150,10 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
             >
               <div className="p-6 flex justify-between items-center border-b border-slate-100 dark:border-slate-800">
                 <span className="text-xl font-bold font-cairo text-brand-600">Aqua Tanta</span>
-                <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full"
+                >
                   <X size={24} className="text-slate-500" />
                 </button>
               </div>
@@ -161,16 +174,22 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
               </div>
 
               <div className="p-6 border-t border-slate-100 dark:border-slate-800 space-y-4">
-                 <div className="flex gap-4">
-                   <button onClick={toggleTheme} className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">
-                     {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-                     <span>{theme === 'light' ? 'Dark' : 'Light'}</span>
-                   </button>
-                   <button onClick={toggleLanguage} className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">
-                     <Globe size={18} />
-                     <span>{language === 'ar' ? 'English' : 'العربية'}</span>
-                   </button>
-                 </div>
+                <div className="flex gap-4">
+                  <button
+                    onClick={toggleTheme}
+                    className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium"
+                  >
+                    {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+                    <span>{theme === 'light' ? 'Dark' : 'Light'}</span>
+                  </button>
+                  <button
+                    onClick={toggleLanguage}
+                    className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium"
+                  >
+                    <Globe size={18} />
+                    <span>{language === 'ar' ? 'English' : 'العربية'}</span>
+                  </button>
+                </div>
               </div>
             </motion.div>
           </>

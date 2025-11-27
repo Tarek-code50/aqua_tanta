@@ -70,7 +70,7 @@ const ProductModal: React.FC<{
 
   useEffect(() => {
     if (product) {
-      setFormData(product);
+      setFormData(product); // eslint-disable-line react-hooks/set-state-in-effect
     } else {
       setFormData({
         id: Date.now().toString(),
@@ -220,7 +220,7 @@ const Overview: React.FC = () => {
                <Icons.Cart />
             </div>
           </div>
-          <p className="text-xs text-slate-500 mt-4">Clicks on 'Buy Now'</p>
+            <p className="text-xs text-slate-500 mt-4">Clicks on &lsquo;Buy Now&rsquo;</p>
         </Card>
 
         <Card>
@@ -434,13 +434,13 @@ const SettingsManager: React.FC = () => {
     setFormData(settings);
   }, [settings]);
 
-  const handleChange = (section: keyof SiteSettings, key: string, value: any) => {
-    setFormData(prev => ({
+  const handleChange = (section: keyof SiteSettings, key: string, value: Record<string, unknown> | string) => {
+    setFormData((prev) => ({
       ...prev,
       [section]: {
-        ...prev[section],
-        [key]: value
-      }
+        ...(prev[section] as Record<string, unknown>),
+        [key]: value,
+      },
     }));
   };
 
@@ -469,7 +469,7 @@ const SettingsManager: React.FC = () => {
               value={formData.contact.whatsappNumber}
               onChange={(e) => handleChange('contact', 'whatsappNumber', e.target.value)}
             />
-            <p className="text-xs text-slate-500 mt-1">Controls all "Buy" buttons</p>
+            <p className="text-xs text-slate-500 mt-1">Controls all &ldquo;Buy&rdquo; buttons</p>
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Facebook Link</label>
@@ -677,7 +677,7 @@ const Admin: React.FC = () => {
           {menuItems.map((item) => (
             <button
               key={item.id}
-              onClick={() => setActiveTab(item.id as any)}
+              onClick={() => setActiveTab(item.id as string)}
               className={`w-full flex items-center gap-3 p-3 rounded-lg transition-colors ${activeTab === item.id ? 'bg-brand-50 dark:bg-slate-700 text-brand-600 dark:text-brand-400 font-medium' : 'text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700'}`}
             >
               <item.icon />

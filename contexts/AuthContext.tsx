@@ -3,30 +3,26 @@ import { supabase } from '../lib/supabaseClient';
 import { UserProfile, UserRole } from '../types';
 
 interface AuthContextType {
-  user: any | null;
+  user: { id: string; email: string } | null;
   profile: UserProfile | null;
   loading: boolean;
   role: UserRole | null;
-  signIn: (email: string, pass: string) => Promise<{ error: any }>;
+  signIn: (email: string, pass: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<any | null>(null);
+  const [user, setUser] = useState<{ id: string; email: string } | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Fetch Profile after Auth State Change
   const fetchProfile = async (userId: string) => {
     try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single();
-      
+      const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single();
+
       if (error) {
         console.error('Error fetching profile:', error);
       } else {
@@ -40,7 +36,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     // Check Active Session
     const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       setUser(session?.user ?? null);
       if (session?.user) {
         await fetchProfile(session.user.id);
@@ -51,7 +49,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     checkSession();
 
     // Listen for changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
       setUser(session?.user ?? null);
       if (session?.user) {
         await fetchProfile(session.user.id);
@@ -67,15 +67,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const signIn = async (email: string, pass: string) => {
-    // For demo purposes, we will intercept the specific hardcoded admin email 
+    // For demo purposes, we will intercept the specific hardcoded admin email
     // to simulate success if Supabase is not fully configured by the user yet.
     // IN PRODUCTION: Remove this mock block.
-    if (email === 'gamal@gmail.com' && pass === 'gamalalatar@12123232' && !process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    if (
+      email === 'gamal@gmail.com' &&
+      pass === 'gamalalatar@12123232' &&
+      !import.meta.env.VITE_SUPABASE_URL
+    ) {
       const mockProfile: UserProfile = {
         id: 'mock-admin-id',
         email: email,
         full_name: 'Gamal Alatar',
-        role: 'admin'
+        role: 'admin',
       };
       setUser({ id: 'mock-admin-id', email });
       setProfile(mockProfile);
@@ -96,14 +100,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      profile, 
-      loading, 
-      role: profile?.role || null,
-      signIn, 
-      signOut 
-    }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        profile,
+        loading,
+        role: profile?.role || null,
+        signIn,
+        signOut,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

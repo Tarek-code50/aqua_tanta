@@ -17,10 +17,10 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   useEffect(() => {
     const root = window.document.documentElement;
     const dir = language === 'ar' ? 'rtl' : 'ltr';
-    
+
     root.setAttribute('lang', language);
     root.setAttribute('dir', dir);
-    
+
     // Switch fonts based on language
     if (language === 'ar') {
       root.classList.add('font-cairo');
@@ -29,21 +29,16 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       root.classList.add('font-sans');
       root.classList.remove('font-cairo');
     }
-
   }, [language]);
 
   const value = {
     language,
     setLanguage,
     t: TRANSLATIONS[language],
-    dir: language === 'ar' ? 'rtl' : 'ltr' as 'rtl' | 'ltr',
+    dir: language === 'ar' ? 'rtl' : ('ltr' as 'rtl' | 'ltr'),
   };
 
-  return (
-    <LanguageContext.Provider value={value}>
-      {children}
-    </LanguageContext.Provider>
-  );
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 };
 
 export const useLanguage = () => {

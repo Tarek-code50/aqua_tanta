@@ -12,13 +12,14 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     titleAr: 'مياه نقية لعائلتك في طنطا',
     titleEn: 'Pure Water for Tanta Families',
     subtitleAr: 'أفضل حلول تنقية المياه بضمان شامل وخدمة ما بعد البيع متميزة.',
-    subtitleEn: 'Top-tier water purification solutions with comprehensive warranty and excellent after-sales service.',
+    subtitleEn:
+      'Top-tier water purification solutions with comprehensive warranty and excellent after-sales service.',
     announcement: 'خصم 10% لفترة محدودة',
   },
   config: {
     maintenanceMode: false,
     deliveryFee: 50,
-  }
+  },
 };
 
 export const TRANSLATIONS: Record<'ar' | 'en', Dictionary> = {
@@ -134,7 +135,7 @@ export const TRANSLATIONS: Record<'ar' | 'en', Dictionary> = {
         email: 'البريد',
         role: 'الصلاحية',
         createSuccess: 'تم إنشاء حساب الموظف بنجاح',
-      }
+      },
     },
   },
   en: {
@@ -149,7 +150,8 @@ export const TRANSLATIONS: Record<'ar' | 'en', Dictionary> = {
     },
     hero: {
       title: 'Pure Water for Tanta Families',
-      subtitle: 'Top-tier water purification solutions with comprehensive warranty and excellent after-sales service.',
+      subtitle:
+        'Top-tier water purification solutions with comprehensive warranty and excellent after-sales service.',
       cta: 'Order via WhatsApp',
     },
     features: {
@@ -249,7 +251,7 @@ export const TRANSLATIONS: Record<'ar' | 'en', Dictionary> = {
         email: 'Email',
         role: 'Role',
         createSuccess: 'Worker account created successfully',
-      }
+      },
     },
   },
 };
@@ -259,7 +261,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     id: 'p1',
     name: { ar: 'فلتر 7 مراحل تايواني', en: '7-Stage Taiwanese Filter' },
     price: 3500,
-    description: { ar: 'تنقية كاملة مع وحدة معالجة وحوحدة أملاح.', en: 'Complete purification with processing unit and mineralizer.' },
+    description: {
+      ar: 'تنقية كاملة مع وحدة معالجة وحوحدة أملاح.',
+      en: 'Complete purification with processing unit and mineralizer.',
+    },
     image: 'https://picsum.photos/400/400?random=1',
     category: 'filter',
     stock: 12,
@@ -268,7 +273,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     id: 'p2',
     name: { ar: 'فلتر 5 مراحل', en: '5-Stage Filter' },
     price: 1200,
-    description: { ar: 'الحل الاقتصادي لمياه نقية خالية من الشوائب.', en: 'The economical solution for pure water free of impurities.' },
+    description: {
+      ar: 'الحل الاقتصادي لمياه نقية خالية من الشوائب.',
+      en: 'The economical solution for pure water free of impurities.',
+    },
     image: 'https://picsum.photos/400/400?random=2',
     category: 'filter',
     stock: 5,
@@ -277,7 +285,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     id: 'p3',
     name: { ar: 'طقم شمعات (3 قطع)', en: 'Filter Cartridges Set (3 pcs)' },
     price: 150,
-    description: { ar: 'طقم شمعات المرحلة الأولى والثانية والثالثة.', en: 'Set of 1st, 2nd, and 3rd stage cartridges.' },
+    description: {
+      ar: 'طقم شمعات المرحلة الأولى والثانية والثالثة.',
+      en: 'Set of 1st, 2nd, and 3rd stage cartridges.',
+    },
     image: 'https://picsum.photos/400/400?random=3',
     category: 'spare',
     stock: 100,
@@ -294,10 +305,42 @@ export const INITIAL_PRODUCTS: Product[] = [
 ];
 
 export const MOCK_ORDERS: Order[] = [
-  { id: '101', customerName: 'Ahmed Ali', phone: '01012345678', date: '2023-10-25', status: 'new', total: 3500, items: '7-Stage Filter' },
-  { id: '102', customerName: 'Sara Mahmoud', phone: '01234567890', date: '2023-10-24', status: 'completed', total: 150, items: 'Cartridges Set' },
-  { id: '103', customerName: 'Mohamed Sami', phone: '01112223334', date: '2023-10-24', status: 'assigned', total: 1200, items: 'Maintenance' },
-  { id: '104', customerName: 'Hoda Ezzat', phone: '01555666777', date: '2023-10-23', status: 'cancelled', total: 0, items: 'Inquiry' },
+  {
+    id: '101',
+    customerName: 'Ahmed Ali',
+    phone: '01012345678',
+    date: '2023-10-25',
+    status: 'new',
+    total: 3500,
+    items: '7-Stage Filter',
+  },
+  {
+    id: '102',
+    customerName: 'Sara Mahmoud',
+    phone: '01234567890',
+    date: '2023-10-24',
+    status: 'completed',
+    total: 150,
+    items: 'Cartridges Set',
+  },
+  {
+    id: '103',
+    customerName: 'Mohamed Sami',
+    phone: '01112223334',
+    date: '2023-10-24',
+    status: 'assigned',
+    total: 1200,
+    items: 'Maintenance',
+  },
+  {
+    id: '104',
+    customerName: 'Hoda Ezzat',
+    phone: '01555666777',
+    date: '2023-10-23',
+    status: 'cancelled',
+    total: 0,
+    items: 'Inquiry',
+  },
 ];
 
 export const MOCK_TECHNICIANS: Technician[] = [
